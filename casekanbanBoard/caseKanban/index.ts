@@ -4,11 +4,10 @@ import { IInputs, IOutputs } from "./generated/ManifestTypes";
 interface Lead {
   id: string;
   name: string;
- 
   title: string;
   date: string;
   status_reason: string;
-
+  label_reason: string;
 
 }
 
@@ -119,30 +118,28 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
       const result = await this.context.webAPI.retrieveMultipleRecords(entityName, `?fetchXml=${encodeURIComponent(fetchXML)}`);
 
       result.entities.forEach((entity: ComponentFramework.WebApi.Entity) => {
-       // Ensure a valid Date object is always assigned
-    const date = entity.sam_followupby
-    ? new Date(entity.sam_followupby)
-    : new Date(entity.followupby);
+        // Ensure a valid Date object is always assigned
+        const date = entity.sam_followupby
+          ? new Date(entity.sam_followupby)
+          : new Date(entity.followupby);
 
         const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
         leads.push({
           id: entity.incidentid || entity.sam_incidentid,
-
           name: entity["contact.fullname"] || entity["account.name"] || "",
-         
-
           date: formattedDate || "",
           status_reason: this.statusReasonLabels[entity.sam_casetypecode] || this.statusReasonLabels[entity.casetypecode] || "",
-          title: entity["sam_title"] || entity["title"] || ""  
+          title: entity["sam_title"] || entity["title"] || "",
+          label_reason: ""
         });
 
       });
-    // Sort leads by date (oldest first)
-        leads.sort((a, b) => {
+      // Sort leads by date (oldest first)
+      leads.sort((a, b) => {
         const dateA = new Date(a.date.split("-").reverse().join("-"));
         const dateB = new Date(b.date.split("-").reverse().join("-"));
         return dateA.getTime() - dateB.getTime(); // Oldest first
-});
+      });
 
       return leads;
 
@@ -163,12 +160,13 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
 
     card.innerHTML = `
     <div class="box">
+    <h2 class="status-reason">${lead.label_reason}</h2>
     <div class="content-box">
     <h3 class="userName">${lead.title}</h3>
       <div class="details">
         <span>${lead.name} </span>
         
-        <span>${lead.date}</span></div>
+        <span>Follow Up: ${lead.date}</span></div>
       </div>
     </div>  
     </div>
@@ -190,32 +188,32 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
     const leadId = target.getAttribute("data-id");
 
     if (!leadId) {
-        console.warn("No leadId found on clicked card.");
-        return;
+      console.warn("No leadId found on clicked card.");
+      return;
     }
 
     // Determine entity name based on environment
     const entityName = this.baseUrl.includes("https://cti.crm6.dynamics.com") ? "incident" : "sam_incident";
 
     const entityFormOptions = {
-        entityName: entityName, // Use "incident" for Prod, "sam_incident" for Dev
-        entityId: leadId
+      entityName: entityName, // Use "incident" for Prod, "sam_incident" for Dev
+      entityId: leadId
     };
 
     console.log("Opening form with entity:", entityFormOptions);
 
     if (this.context.navigation && this.context.navigation.openForm) {
-        this.context.navigation.openForm(entityFormOptions)
-            .then(() => {
-                console.log("Form opened successfully.");
-            })
-            .catch((error: any) => {
-                console.error("Error opening form:", error);
-            });
+      this.context.navigation.openForm(entityFormOptions)
+        .then(() => {
+          console.log("Form opened successfully.");
+        })
+        .catch((error: any) => {
+          console.error("Error opening form:", error);
+        });
     } else {
-        console.error("Navigation context not available. Cannot open form.");
+      console.error("Navigation context not available. Cannot open form.");
     }
-};
+  };
 
   private handleDrop = async (event: DragEvent): Promise<void> => {
     event.preventDefault();
@@ -329,13 +327,13 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
   private handleSignUp = (): void => {
     // Determine entity name based on environment
     const entityName = this.baseUrl.includes("https://cti.crm6.dynamics.com") ? "incident" : "sam_incident";
-  
+
     const entityFormOptions = {
       entityName: entityName, // Use "incident" for Prod, "sam_incident" for Dev
     };
-  
+
     console.log("Opening sign-up form with entity:", entityFormOptions);
-  
+
     if (this.context.navigation && this.context.navigation.openForm) {
       this.context.navigation.openForm(entityFormOptions)
         .then(() => {
@@ -348,7 +346,7 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
       console.error("Navigation context not available. Cannot open Case form.");
     }
   };
-  
+
 
 
   private async renderKanbanBoard(): Promise<void> {

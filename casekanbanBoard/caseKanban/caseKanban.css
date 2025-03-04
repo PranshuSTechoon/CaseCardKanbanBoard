@@ -93,20 +93,12 @@
     cursor: pointer;
 }
 
-.carpentry {
-    border: 2px solid yellow;
-}
-
-.tiling {
-    border: 2px solid green;
-}
-
-.plastering {
-    border: 2px solid blue;
-}
-
-.concreting {
-    border: 2px solid red;
+.status-reason {
+    font-size: 0.875rem;
+    margin: 0;
+    background-color: #3ba8d4;
+    color: white;
+    padding: 3px 10px;
 }
 
 .mainHeading {
