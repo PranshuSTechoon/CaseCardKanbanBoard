@@ -1,0 +1,251 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --primary-active: #003f7f;
+    --background-color: #f4f4f4;
+    --box-background: #fff;
+    --text-color-light: #f4f4f4;
+    --text-color-dark: #13202b;
+    --border-color: #ccc;
+    --font-small: 0.8rem;
+    --font-medium: 1rem;
+    --font-large: 1.6rem;
+    --border-radius: 0.5rem;
+}
+
+.control-container {
+    background-color: #faf9f8 !important;
+}
+
+
+.kanban-board {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: -webkit-fill-available;
+    margin-top: 30px;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.kanban-column {
+    padding: 0px 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.096);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.kanban-column-header {
+    width: 100%;
+    height: 2.125rem;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+    padding: 5px 0px;
+    font-size: 12px;
+    border-bottom: 1px solid #D8DFE0;
+    color: var(--text-color-dark);
+}
+
+.kanban-column-header span:first-letter {
+    text-transform: uppercase;
+}
+
+.search-and-sign-up-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.625rem;
+}
+
+.sign-up-btn {
+    padding: 10px 15px;
+    background-color: #3d85f3;
+    color: #fff;
+    font-size: var(--font-medium);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 34px;
+    width: 100px;
+}
+
+.box {
+    max-width: 100%;
+    text-align: left;
+    min-height: 80px;
+    background: var(--box-background);
+    color: #000;
+    margin-bottom: 0.6875rem;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #D8DFE0;
+}
+
+.box:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.carpentry {
+    border: 2px solid yellow;
+}
+
+.tiling {
+    border: 2px solid green;
+}
+
+.plastering {
+    border: 2px solid blue;
+}
+
+.concreting {
+    border: 2px solid red;
+}
+
+.mainHeading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    flex-direction: column;
+}
+
+.userName {
+    color: rgb(4, 89, 153);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.details {
+    font-size: 0.8rem;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.content-box {
+    padding: 5px 10px;
+}
+
+.date {
+    font-size: 0.5rem;
+    font-weight: 600;
+}
+
+.search-box-container {
+    margin-left: 1.25rem;
+}
+
+#search-box {
+    width: 12.5rem;
+    padding: 0.5rem;
+    font-size: var(--font-medium);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+#search-box::placeholder {
+    color: #999;
+}
+
+
+@media (min-width: 1440px) and (max-width: 1560px) {
+    .kanban-column-header {
+        height: 2.25rem;
+    }
+
+    .mainHeading {
+        font-size: var(--font-large);
+    }
+
+    .search-box-container {
+        margin-left: 2.5rem;
+    }
+
+    .details {
+        font-size: 0.6875rem;
+    }
+
+    .userName {
+        font-size: 0.75rem;
+    }
+
+    .sign-up-btn {
+        padding: 6px 8px;
+    }
+
+    #search-box {
+        padding: 0.3125rem;
+    }
+}
+
+@media (min-width: 1180px) and (max-width: 1340px) {
+
+    .kanban-column-header {
+        font-size: 11px;
+        height: 2.25rem;
+    }
+
+    .mainHeading {
+        flex-direction: row;
+    }
+
+    .box {
+        min-height: 65px;
+    }
+
+    .search-box-container {
+        margin-left: 2rem;
+    }
+
+    .userName {
+        font-size: 0.625rem;
+    }
+
+    .details {
+        font-size: 0.5625rem;
+    }
+
+    .sign-up-btn {
+        padding: 6px 8px;
+    }
+
+    #search-box {
+        padding: 0.3125rem;
+    }
+}
+
+@media (max-width: 1180px) {
+
+    .kanban-column-header {
+        font-size: 11px;
+        height: 2.25rem;
+    }
+
+    .userName {
+        font-size: 0.625rem;
+    }
+
+    .box {
+        min-height: 65px;
+    }
+
+    .details {
+        font-size: 0.5625rem;
+    }
+
+    .sign-up-btn {
+        padding: 6px 8px;
+    }
+
+    #search-box {
+        padding: 0.3125rem;
+    }
+}
