@@ -161,6 +161,10 @@
         margin-left: 2.5rem;
     }
 
+    .status-reason {
+        font-size: 0.75rem;
+    }
+
     .details {
         font-size: 0.6875rem;
     }
@@ -183,6 +187,10 @@
     .kanban-column-header {
         font-size: 11px;
         height: 2.25rem;
+    }
+
+    .status-reason {
+        font-size: 0.625rem;
     }
 
     .mainHeading {
@@ -219,6 +227,11 @@
     .kanban-column-header {
         font-size: 11px;
         height: 2.25rem;
+    }
+
+
+    .status-reason {
+        font-size: 0.5rem;
     }
 
     .userName {
