@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="caseKanbanNs19" constructor="caseKanban19" version="0.0.1" display-name-key="caseKanban19" description-key="caseKanban18 description" control-type="standard">
+  <control namespace="caseKanbanNs20" constructor="caseKanban20" version="0.0.1" display-name-key="caseKanban20" description-key="caseKanban18 description" control-type="standard">
   <data-set name="DataSet" display-name-key="Entity DataSet" cds-data-set-options="displayCommandBar:false;displayViewSelector:true;displayquickfind:true">
     </data-set>
 <resources>

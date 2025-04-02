@@ -11,7 +11,7 @@ interface Lead {
 
 }
 
-export class caseKanban19 implements ComponentFramework.StandardControl<IInputs, IOutputs> {
+export class caseKanban20 implements ComponentFramework.StandardControl<IInputs, IOutputs> {
   private context: ComponentFramework.Context<IInputs>;
   private notifyOutputChanged: () => void;
   private container: HTMLDivElement;
@@ -26,7 +26,23 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
     295290006: "Employer Looking for Apprentice",
     295290008: "AASN Contact Needed"
   };
-
+  private DevActivelabel_reason: Record<number, string> = {
+    1: "In Progress",
+    100000000: "On Hold",
+    522770001: "Waiting for STS Response",
+    522770002: "Monitor & Update STS",
+    522770003: "Suspension Injury",
+    522770004: "Suspension Personal",
+    522770005: "Extension Required"
+  };  private ProdActivelabel_reason: Record<number, string> = {
+    1: "In Progress",
+    2: "On Hold",
+    3: "Waiting for STS Response",
+    4: "Monitor & Update STS",
+    295290001: "Suspension Injury",
+    295290002: "Suspension Personal",
+    295290003: "Extension Required"
+  };
 
   private statusReasonValues: Record<string, number> = {
     "Notification of Issue": 295290001,
@@ -66,6 +82,7 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
                      <attribute name="sam_title" />
                      <attribute name="sam_followupby" />
                      <attribute name="sam_casetypecode" />
+                     <attribute name="statuscode" />
         <filter>
                             <condition attribute="statecode" operator="eq" value="0" />
         </filter>
@@ -91,6 +108,7 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
                      <attribute name="title" />
                      <attribute name="followupby" />
                      <attribute name="casetypecode" />
+                     <attribute name="statuscode" />
                         <filter>
                            <condition attribute="statecode" operator="eq" value="0" />
                       </filter>
@@ -130,7 +148,7 @@ export class caseKanban19 implements ComponentFramework.StandardControl<IInputs,
           date: formattedDate || "",
           status_reason: this.statusReasonLabels[entity.sam_casetypecode] || this.statusReasonLabels[entity.casetypecode] || "",
           title: entity["sam_title"] || entity["title"] || "",
-          label_reason: ""
+          label_reason: this.DevActivelabel_reason[entity.statuscode] || this.ProdActivelabel_reason[entity.statuscode]
         });
 
       });
