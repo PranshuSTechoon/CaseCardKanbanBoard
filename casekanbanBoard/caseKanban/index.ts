@@ -11,7 +11,7 @@ interface Lead {
 
 }
 
-export class caseKanban20 implements ComponentFramework.StandardControl<IInputs, IOutputs> {
+export class caseKanban25 implements ComponentFramework.StandardControl<IInputs, IOutputs> {
   private context: ComponentFramework.Context<IInputs>;
   private notifyOutputChanged: () => void;
   private container: HTMLDivElement;
